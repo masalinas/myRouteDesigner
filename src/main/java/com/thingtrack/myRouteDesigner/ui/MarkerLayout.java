@@ -33,7 +33,7 @@ public class MarkerLayout extends PortalLayout {
             final Integer portletPosition = (Integer) portletParameters
                     .get(PortalConst.PORTLET_POSITION);
             
-            MarkerPanel markerPanel = (MarkerPanel) component;
+            MarkerPanel markerPanel = (MarkerPanel) component;            
             Vector vector = (Vector) markerPanel.getVector();
             
             if (portletPosition != markerPanel.getPosition() - 1) {            	
