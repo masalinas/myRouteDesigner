@@ -26,19 +26,16 @@ public class MarkerLayout extends PortalLayout {
 		// listen to move marker event
         if (variables.containsKey(PortalConst.PORTLET_POSITION_UPDATED)) {
         	@SuppressWarnings("unchecked")
-			final Map<String, Object> portletParameters = (Map<String, Object>) variables
-                    .get(PortalConst.PORTLET_POSITION_UPDATED);
-            final Component component = (Component) portletParameters
-                    .get(PortalConst.PAINTABLE_MAP_PARAM);
-            final Integer portletPosition = (Integer) portletParameters
-                    .get(PortalConst.PORTLET_POSITION);
+			final Map<String, Object> portletParameters = (Map<String, Object>) variables.get(PortalConst.PORTLET_POSITION_UPDATED);
+            final Component markerPanelComponent = (Component) portletParameters.get(PortalConst.PAINTABLE_MAP_PARAM);
+            final Integer markerPanelPosition = (Integer) portletParameters.get(PortalConst.PORTLET_POSITION);
             
-            MarkerPanel markerPanel = (MarkerPanel) component;            
+            MarkerPanel markerPanel = (MarkerPanel) markerPanelComponent;            
             Vector vector = (Vector) markerPanel.getVector();
-            
-            if (portletPosition != markerPanel.getPosition() - 1) {            	
+                                    
+            if (markerPanelPosition != markerPanel.getPosition() - 1) {            	
             	if (listenerMarkerMove != null)
-            		listenerMarkerMove.markerMove(new MarkerEvent(component, portletPosition, vector));
+            		listenerMarkerMove.markerMove(new MarkerEvent(markerPanelComponent, markerPanelPosition, vector));
             	
             	reorderComponents();
             }
@@ -51,12 +48,12 @@ public class MarkerLayout extends PortalLayout {
 		super.addComponent(component);
 				
 		MarkerPanel markerPanel = (MarkerPanel) component;
-		Vector vector = (Vector) markerPanel.getVector();
+		Vector markerVector = (Vector) markerPanel.getVector();
 		
 		markerPanel.setPosition(size());
 		
 		if (listenerMarkerAdd != null)
-			listenerMarkerAdd.markerAdd(new MarkerEvent(component, size(), vector));
+			listenerMarkerAdd.markerAdd(new MarkerEvent(component, size(), markerVector));
 	}
 	
 	@Override
@@ -65,10 +62,10 @@ public class MarkerLayout extends PortalLayout {
 		super.removeComponent(component);
 		
 		MarkerPanel markerPanel = (MarkerPanel) component;
-		Vector vector = (Vector) markerPanel.getVector();
+		Vector markerVector = (Vector) markerPanel.getVector();
         
 		if (listenerMarkerRemove != null)
-			listenerMarkerRemove.markerRemove(new MarkerEvent(component, -1, vector));		
+			listenerMarkerRemove.markerRemove(new MarkerEvent(component, -1, markerVector));		
 			
 		reorderComponents();
 		
@@ -188,9 +185,7 @@ public class MarkerLayout extends PortalLayout {
 		 */
 		public void setVector(Vector vector) {
 			this.vector = vector;
-		}
-
-		
+		}		
 		
 	  }
 }
