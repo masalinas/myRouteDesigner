@@ -104,6 +104,9 @@ public class MainLayout extends CustomComponent implements Handler {
     private Vector vectorSelected = null;    
     private DrawingMode mapStatus = DrawingMode.NONE;
     
+	private static final String ROUTE_TYPE_FASTEST_CAPTION = "Camino más rápido";
+	private static final String ROUTE_TYPE_SHORTEST_CAPTION = "Camino más corto";
+	
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
